@@ -60,6 +60,13 @@ namespace Handyman
                     u.UseBackOfficeEndpoints();
                     u.UseWebsiteEndpoints();
                 });
+
+            app.UseHttpsRedirection();
+            app.UseXfo(options => options.SameOrigin());
+            app.UseHttpsRedirection();
+            app.UseHsts(options => options.MaxAge(days: 365));
+            app.UseXContentTypeOptions();
+            app.UseXXssProtection(options => options.EnabledWithBlockMode());
         }
     }
 }
